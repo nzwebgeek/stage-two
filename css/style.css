@@ -1,0 +1,230 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+html{
+    color: white;
+
+}
+ #form-title{
+    color: black;
+    text-align: center;
+ }
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.container{
+    display: grid;
+    background-color: cadetblue;
+    width: 95vw;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: 
+    "header" 
+    "main" 
+    "footer";
+    margin: 0 auto;
+    border-radius: 3rem;
+    text-align: center;
+}
+.container.active {
+  background-color: cornflowerblue;
+}
+
+button{
+    color: white;
+    background-color: blue;
+    padding: .5rem;
+    border-radius: 6px;
+}
+.light-grey{
+    background-color: #333;
+}
+.dark-theme{
+    background-color: black;
+}
+header{
+    grid-area:  header;
+    background: #000;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    background-color: #333;
+  
+
+}
+
+main{
+    grid-area: main;
+    padding:1rem;
+    grid-template-columns: auto 1fr auto;
+
+}
+
+footer{
+    grid-area: footer;
+    background-color: black;
+    padding: 1rem;
+    background-color: #333;
+
+
+}
+/*Navigation ---------------------------*/
+nav{
+    padding: 2rem;
+}
+/*Navigation*/
+nav ul{
+    list-style: none;
+    display: grid;
+    grid-auto-flow: column;
+    grid: 20px;
+    justify-content: end;
+}
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 0.8rem;
+    transition: background .3s;
+}
+
+nav.a:hover{
+    background-color: blueviolet;
+}
+
+/* Responsive: stack logo and menu on small screens */
+    @media (max-width: 600px) {
+        header {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto auto;
+            text-align: center;
+        }
+
+        nav ul {
+            grid-auto-flow: row;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px 0;
+        }
+    }
+/*Footer Section------------------------------------------------*/
+    /* Base Structure */
+.site-footer {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  padding: 60px 20px 20px 20px;
+  font-family: sans-serif;
+}
+
+/* Flexbox Grid Container */
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+/* Individual Columns */
+.footer-column {
+  flex: 1;
+  min-width: 220px; /* Forces wrapping on mobile screens */
+}
+
+.footer-column h3 {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #3498db; /* Accent color */
+}
+
+.footer-column p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #b3b3b3;
+}
+
+/* Navigation Lists */
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+  color: #b3b3b3;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.footer-column ul li a:hover {
+  color: #ffffff;
+}
+
+/* Bottom Bar styling */
+.footer-bottom {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #333333;
+  font-size: 13px;
+  color: #666666;
+}
+
+/*Contact Form -------------------------------------*/
+form {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  width: 50vw;
+  margin: 0 auto;
+  color: black;
+}
+
+label {display: block;}
+
+input[type=text], 
+input[type=email],
+input[type=password],
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: black;
+  padding: 14px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+textarea {
+  /* Prevents the user from resizing the box */
+  resize: none; 
+  
+  /* Standard box sizing control */
+  width: 100%;
+  height: 150px;
+}
