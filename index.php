@@ -28,9 +28,10 @@ if (isset($_POST['update'])) {
 if (isset($_POST['delete_id'])) {
 
     $id = (int)$_POST['delete_id'];
+    $user_id = $_SESSION['user_id'];
 
-    $stmt = $conn->prepare("DELETE FROM blogg WHERE id = ?");
-    $stmt->bind_param("i", $id);
+    $stmt = $conn->prepare("DELETE FROM blogg WHERE id = ? AND user_id = ?");
+    $stmt->bind_param("i", $id, $user_id);
 
     if ($stmt->execute()) {
         $message = "Comment deleted.";
@@ -64,7 +65,7 @@ if (isset($_POST['comments'])) {
 }
 
 /* ---------------- EDIT STATE ---------------- */
-$editing = isset($_POST['edit']) ? (int)$_POST['edit'] : 0;
+//$editing = isset($_POST['edit']) ? (int)$_POST['edit'] : 0;
 
 include 'includes/header.php';
 ?>
