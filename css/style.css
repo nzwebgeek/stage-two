@@ -14,8 +14,9 @@ html{
  }
 body{
     font-family: Arial, Helvetica, sans-serif;
-}
+        line-height: 1.6;
 
+}
 
 .container{
     display: grid;
@@ -37,24 +38,52 @@ body{
 }
 /* index page*/
 .wrapper {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  justify-content: space-between;
-  gap: 10px;
-  /*grid-auto-rows: 100px;*/
-  grid-auto-rows: minmax(100px, auto);
- 
-  align-items: start;
+  max-width: 900px;
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 
 .username {
     font-weight: bold;
 }
-
+.comment-content-box{
+   display: grid;
+  height: 400px;
+  grid-template-columns:  repeat(3, 1fr);
+  background-color: dodgerblue;
+  padding: 5px;
+  gap: 10px;
+  align-content: start;
+   min-height: 400px;
+}
+.comment-content-box div {
+  background-color: #f1f1f1;
+  color:#000;
+  padding: 10px;
+  font-size: 30px;
+  text-align: center;
+}
 .comment {
-    background: #f1f1f1;
-    padding: 10px;
+     background: #ffffff;
+    color: #333;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,.15);
+    text-align: left;
+}
+
+.comment h3 {
+    margin: 0 0 10px;
+    color: #4d7ca8;
+}
+
+.comment p {
+    margin: 0;
+    line-height: 1.6;
+    overflow-wrap: break-word;
 }
 
 button{
@@ -96,6 +125,69 @@ footer{
 
 
 }
+/*------------------Placeholder start--------------------*/
+.placeholder-container {
+    display: grid;
+    grid-template-areas:
+        "header"
+        "hero"
+        "main"
+        "features";
+    gap: 2rem;
+    min-height: 100vh;
+}
+
+/* Hero */
+
+.placeholder-hero {
+    grid-area: hero;
+    background: #4f7df3;
+    color: white;
+    padding: 5rem 2rem;
+    text-align: center;
+}
+
+/* Main */
+
+#placeholder-main {
+    grid-area: main;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 2rem;
+    padding: 0 2rem;
+}
+
+.placeholder-content,
+aside {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    color: black;
+}
+
+/* Features */
+
+.placeholder-features {
+    grid-area: features;
+    color: black;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+
+    padding: 0 2rem;
+}
+
+.placeholder-features article {
+    background: white;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 8px;
+}
+
+/* Responsive */
+
+
+/*-------------Placeholder End-------------------------------------------*/
 /*Navigation ---------------------------*/
 nav{
     padding: 2rem;

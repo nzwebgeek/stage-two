@@ -14,9 +14,12 @@ $result = $conn->query($sql);
 
 if ($result && $result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-   
-        echo "<div>" . htmlspecialchars($row['username']) . "</div>";
-        echo htmlspecialchars($row['comment']);
+   echo '
+    <div class="comment">
+        <h3>' . htmlspecialchars($row['username']) . '</h3>
+        <p>' . nl2br(htmlspecialchars($row['comment'])) . '</p>
+    </div>';
+       
       
 
     }

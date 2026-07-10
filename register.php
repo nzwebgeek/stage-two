@@ -59,9 +59,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <input type="submit" value="Register">
 
 </form>
+        <button id="toggleBtn">Change Color</button>
 
 </section>
-        <button id="toggleBtn">Change Color</button>
 
 </main>
 
