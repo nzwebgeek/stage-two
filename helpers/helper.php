@@ -1,33 +1,29 @@
+<?php
+
+include 'db.php';
 
 
-// Check if entered data is valid       
-// Form data
-$fName = trim($_POST['firstname'] ?? '');
-$lName = trim($_POST['lastname'] ?? '');
-$country = trim($_POST['country'] ?? '');
+function comments($conn){
+  $sql = "SELECT blogg.comment, users.username
+        FROM blogg
+        INNER JOIN users
+        ON blogg.user_id = users.id
+        ORDER BY blogg.id DESC";
 
-/*if ($_SERVER["REQUEST_METHOD"] === "POST") {
-  if (is_numeric($fName) || is_numeric($lName)) {
-    die('Names cannot be numbers.');
-    }
-    else{
-        $prepStmt =$conn->prepare("INSERT INTO users (fName, lname, country) VALUES (?, ?, ?)");
+$result = $conn->query($sql);
 
-        $prepStmt->bind_param("sss",$fName, $lName, $country);
-
-        $prepStmt->execute();
-        echo 'Add Successfully';
-
+if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+   
+        echo "<div>" . htmlspecialchars($row['username']) . "</div>";
+        echo htmlspecialchars($row['comment']);
       
-        // After your execute statement
-        $prepStmt->execute();
-        $prepStmt->close(); // Close once, explicitly
 
-        // Redirect to prevent form resubmission
-        header("Location: ../index.php?success=true");
-        exit();
-        }
-    
-}*/
-  
-// Check connection immediately
+    }
+} else {
+    echo "<p>No comments yet.</p>";
+}
+
+//$conn->close();
+}
+?>

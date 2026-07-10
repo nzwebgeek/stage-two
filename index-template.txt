@@ -1,0 +1,15 @@
+<?php
+if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo "<div class='wrapper'>";
+        echo "<div class='item'><h2>" . htmlspecialchars($row['username']) . "</h2></div>";
+        echo "<div class='item'>" . htmlspecialchars($row['comment']) . "</div>";
+        echo "<hr>";
+        echo "</div>";
+    }
+} else {
+    echo "<p>No comments yet.</p>";
+}
+
+$conn->close();
+?>

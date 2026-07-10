@@ -1,6 +1,12 @@
 <?php
 
 session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
 require_once 'db.php';
 
 $message = "";
@@ -10,9 +16,10 @@ if (isset($_POST['update'])) {
 
     $id = (int)$_POST['edit_id'];
     $comment = trim($_POST['comment']);
+    $user_id = $_SESSION['user_id'];
 
-    $stmt = $conn->prepare("UPDATE blogg SET comment = ? WHERE id = ?");
-    $stmt->bind_param("si", $comment, $id);
+    $stmt = $conn->prepare("UPDATE blogg SET comment = ? WHERE id = ?  AND user_id = ?");
+    $stmt->bind_param("sii", $comment, $id, $user_id);
 
     if ($stmt->execute()) {
         $message = "Comment updated.";
@@ -27,9 +34,10 @@ if (isset($_POST['update'])) {
 if (isset($_POST['delete_id'])) {
 
     $id = (int)$_POST['delete_id'];
+    $user_id = $_SESSION['user_id'];
 
-    $stmt = $conn->prepare("DELETE FROM blogg WHERE id = ?");
-    $stmt->bind_param("i", $id);
+    $stmt = $conn->prepare("DELETE FROM blogg WHERE id = ? AND user_id = ?");
+    $stmt->bind_param("ii", $id, $user_id);
 
     if ($stmt->execute()) {
         $message = "Comment deleted.";
@@ -112,6 +120,7 @@ include 'includes/header.php';
     JOIN users ON blogg.user_id = users.id
     ORDER BY blogg.id DESC
 ");
+
     while ($row = $result->fetch_assoc()) {
     ?>
 
@@ -126,7 +135,7 @@ include 'includes/header.php';
                     <div class="comment-header">
                         <span class="author-name"> <?= htmlspecialchars($row['username']) ?></span>
                     </div>
-
+  
                     <!-- EDIT MODE -->
                     <?php if ($editing == $row['id']) { ?>
 
@@ -145,14 +154,18 @@ include 'includes/header.php';
                             <?= htmlspecialchars($row['comment']) ?>
                         </p>
 
-                        <form method="post" style="display:inline;">
-                            <button type="submit" name="edit" value="<?= $row['id'] ?>">Edit</button>
-                        </form>
+                        <?php if ($row['user_id'] == $_SESSION['user_id']) { ?>
 
-                        <form method="post" style="display:inline;">
-                            <input type="hidden" name="delete_id" value="<?= $row['id'] ?>">
-                            <button type="submit">Delete</button>
-                        </form>
+                            <form method="post" style="display:inline;">
+                                <button type="submit" name="edit" value="<?= $row['id'] ?>">Edit</button>
+                            </form>
+
+                            <form method="post" style="display:inline;">
+                                <input type="hidden" name="delete_id" value="<?= $row['id'] ?>">
+                                <button type="submit">Delete</button>
+                            </form>
+
+                        <?php } ?>
 
                     <?php } ?>
 
