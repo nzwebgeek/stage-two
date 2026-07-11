@@ -33,15 +33,19 @@ body.active {
   text-align: center;  
 }
 
-body{
+/*body{
     background-color: cadetblue;
-}
+}*/
 a{
   color: white;
 }
 
-#panel{
+.hidden {
     display: none;
+}
+
+.show {
+    display: block;
 }
 
 .message{
@@ -54,4 +58,25 @@ img{
     margin-top:20px;
     border-radius:8px;
     border:1px solid #ccc;
+}
+
+body {
+    background: var(--background);
+    color: var(--text);
+}
+
+
+header {
+    background: var(--primary);
+}
+
+
+.sidebar {
+    background: var(--sidebar);
+}
+
+
+button {
+    background: var(--secondary);
+    color:white;
 }

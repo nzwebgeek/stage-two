@@ -125,8 +125,9 @@ $stmt->close();
     <div class="menu">
         <a href="edit-index.php">Edit Home Posts</a><br>
         <a href="change_password.php">Change Password</a><br>
+        <a href="#" onclick="showPanel();">Upload Image</a><br>
+        <a href="#" onclick="showPanel2();">Edit Profile</a>
         <a href="logout.php">Logout</a><br>
-        <a href="#" onclick="showPanel();">Upload Image</a>
     </div>
 
     <div class="content">
@@ -151,7 +152,7 @@ $stmt->close();
 
         <?php endif; ?>
 
-        <form method="post" enctype="multipart/form-data" id="panel" style="background:navy;">
+        <form method="post" enctype="multipart/form-data" id="panel" class="hidden" style="background:navy;">
 
             <p>Select image to upload:</p>
 
@@ -164,6 +165,16 @@ $stmt->close();
                    name="submit"
                    value="Upload Image">
 
+        </form>
+
+        <form method="post" id="panel2" class="hidden" style="background:white;">
+            <label>Theme Color</label>
+            <input type="color" name="theme_color">
+            <label>Background</label>
+            <input type="color" name="background_color">
+            <label>Text Color</label>
+            <input type="color" name="text_color">
+            <button type="submit">Save</button>
         </form>
 
         <?php if ($message): ?>
