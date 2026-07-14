@@ -10,6 +10,8 @@ if (session_status() === PHP_SESSION_NONE) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio</title>
     <link rel="stylesheet" href="css/style.css">
+      
+
     <script src="js/script.js" defer></script>
 </head>
 <body>

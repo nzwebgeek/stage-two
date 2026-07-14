@@ -188,14 +188,40 @@ button{
     <div class="header">
         <h1>Dashboard</h1>
     </div>
+<?php
+/* ==========================================
+   Load Posts
+========================================== */
 
-    <div class="menu">
-        <a href="edit-index.php">Edit Home Posts</a><br>
-        <a href="change_password.php">Change Password</a><br>
-        <a href="#" class="show-form" data-form="uploadForm">Upload Image</a><br>
-        <a href="#" class="show-form" data-form="profileForm">Edit Profile</a><br>
-        <a href="logout.php">Logout</a><br>
-    </div>
+$stmt = $conn->prepare("
+    SELECT id, title
+    FROM posts
+    ORDER BY id DESC
+");
+
+$stmt->execute();
+
+$posts = $stmt->get_result();
+
+$stmt->close();
+?>
+   <div class="menu">
+
+    <a href="#" id="showPosts">Edit Post</a><br>
+
+    <a href="change_password.php">Change Password</a><br>
+
+    <a href="#" class="show-form" data-form="uploadForm">
+        Upload Image
+    </a><br>
+
+    <a href="#" class="show-form" data-form="profileForm">
+        Edit Profile
+    </a><br>
+
+    <a href="logout.php">Logout</a><br>
+
+</div>
 
     <div class="content">
 
@@ -261,6 +287,7 @@ button{
 
 </form> 
 
+
         <?php if ($message): ?>
 
             <div class="message">
@@ -268,9 +295,26 @@ button{
             </div>
 
         <?php endif; ?>
+<br>
+
+<div class="post-links" id="postList" style="display:none;">
+
+    <h3>Edit Home Posts</h3>
+
+    <?php while ($post = $posts->fetch_assoc()) : ?>
+
+        <p>
+            <a href="edit-index.php?id=<?= $post['id']; ?>">
+                <?= htmlspecialchars($post['title']); ?>
+            </a>
+        </p>
+
+    <?php endwhile; ?>
+
+</div>
 
     </div>
-
+    
     <div class="footer">
         <h4>Footer</h4>
     </div>

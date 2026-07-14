@@ -1,7 +1,45 @@
 <?php
 
 //include 'db.php';
+function blogPosts($conn)
+{
+    $sql = "SELECT posts.*, users.username
+            FROM posts
+            JOIN users
+            ON posts.user_id = users.id
+            ORDER BY posts.id DESC";
 
+    $result = $conn->query($sql);
+
+    while($row = $result->fetch_assoc())
+    {
+        echo '
+
+        <article class="post">
+
+            <h2>'.htmlspecialchars($row["title"]).'</h2>
+
+            <small>
+                By '.htmlspecialchars($row["username"]).'
+            </small>
+
+            <p>
+
+            '.substr(htmlspecialchars($row["content"]),0,150).'...
+
+            </p>
+
+            <a href="post.php?id='.$row["id"].'">
+
+                Read More
+
+            </a>
+
+        </article>
+
+        ';
+    }
+}
 
 function comments($conn, $postId)
 {
@@ -15,9 +53,16 @@ function comments($conn, $postId)
     $offset = ($page - 1) * $commentsPerPage;
 
     // Count total comments
-    $countSql = "SELECT COUNT(*) AS total FROM blogg";
-    $countResult = $conn->query($countSql);
-    $totalComments = $countResult->fetch_assoc()['total'];
+    $countSql = "SELECT COUNT(*) AS total
+             FROM blogg
+             WHERE post_id = ?";
+
+            $stmt = $conn->prepare($countSql);
+            $stmt->bind_param("i", $postId);
+            $stmt->execute();
+
+            $countResult = $stmt->get_result();
+            $totalComments = $countResult->fetch_assoc()['total'];
 
     // Get only this page of comments
     $sql = "SELECT blogg.comment, users.username
@@ -32,8 +77,7 @@ function comments($conn, $postId)
             $stmt->bind_param("iii", $postId, $offset, $commentsPerPage);
             $stmt->execute();
 
-            $result = $stmt->get_result();
-    
+            $result = $stmt->get_result();    
 
     while ($row = $result->fetch_assoc()) {
         echo '
@@ -49,16 +93,13 @@ function comments($conn, $postId)
     echo '<div class="pagination">';
 
     if ($page > 1) {
-        echo '<a href="?page=' . ($page - 1) . '">Previous</a> ';
-    }
+        echo '<a href="post.php?id='.$postId.'&page='.($page-1).'">Previous</a>';    }
 
     for ($i = 1; $i <= $totalPages; $i++) {
-        echo '<a href="?page=' . $i . '">' . $i . '</a> ';
-    }
+    echo '<a href="post.php?id='.$postId.'&page='.$i.'">'.$i.'</a>';    }
 
     if ($page < $totalPages) {
-        echo '<a href="?page=' . ($page + 1) . '">Next</a>';
-    }
+    echo '<a href="post.php?id='.$postId.'&page='.($page+1).'">Next</a>';    }
 
     echo '</div>';
 }

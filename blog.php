@@ -13,25 +13,18 @@
 
 <div class="comment-content-box">
 
-    <div><img src="img/laravel.png" alt=""></div>
+    <div class="comment-content-img"><img src="img/laravel.png" alt=""></div>
 
-    <div><img src="img/php.jpg" alt=""></div>
+    <div  class="comment-content-img"><img src="img/php.jpg" alt=""></div>
 
-    <div><img src="img/css.jpg" alt=""></div>
-
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
-
-    <div>
-        <button id="toggleBtn">Change Color</button>
-    </div>
-
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+    <div class="comment-content-img"><img src="img/css.jpg" alt=""></div>
 
 </div>
 
 <div class="wrapper">
-    <?php posts($conn); ?>
+    <?php blogPosts($conn); ?>
 </div>
+
 
 </main>
 

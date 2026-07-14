@@ -7,6 +7,21 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
+$postId = 0;
+
+if (isset($_GET['id'])) {
+    $postId = (int) $_GET['id'];
+}
+
+if (isset($_POST['post_id'])) {
+    $postId = (int) $_POST['post_id'];
+}
+
+if ($postId === 0) {
+    die("No post selected.");
+}
+
+
 require_once 'db.php';
 
 $message = "";
@@ -48,15 +63,30 @@ if (isset($_POST['delete_id'])) {
     $stmt->close();
 }
 
+
 /* ---------------- CREATE ---------------- */
 if (isset($_POST['comments'])) {
+
     $user_id = $_SESSION['user_id'];
+    $post_id = (int)$_POST['post_id'];
     $comment = trim($_POST['comments']);
+    $created_at = date('Y-m-d H:i:s');
 
     if (!empty($comment)) {
 
-        $stmt = $conn->prepare("INSERT INTO blogg (user_id, comment) VALUES (?,?)");
-        $stmt->bind_param("is",$user_id, $comment);
+        $stmt = $conn->prepare("
+            INSERT INTO blogg 
+            (post_id, user_id, comment, created_at)
+            VALUES (?, ?, ?, ?)
+        ");
+
+        $stmt->bind_param(
+            "iiss",
+            $post_id,
+            $user_id,
+            $comment,
+            $created_at
+        );
 
         if ($stmt->execute()) {
             $message = "Comment posted successfully!";
@@ -65,11 +95,11 @@ if (isset($_POST['comments'])) {
         }
 
         $stmt->close();
+
     } else {
         $message = "Please enter a comment.";
     }
 }
-
 /* ---------------- EDIT STATE ---------------- */
 $editing = isset($_POST['edit']) ? (int)$_POST['edit'] : 0;
 
@@ -100,26 +130,36 @@ include 'includes/header.php';
     <!-- ADD COMMENT -->
     <form class="comment-form" method="post">
 
-        <div class="avatar-placeholder">ME</div>
+    <div class="avatar-placeholder">ME</div>
 
-        <div class="form-body">
-            <textarea name="comments" placeholder="Join the discussion..." required></textarea>
+    <div class="form-body">
 
-            <button type="submit">Post Comment</button>
-        </div>
+        <textarea name="comments" placeholder="Join the discussion..." required></textarea>
 
-    </form>
+        <input type="hidden" name="post_id" value="<?= $postId ?>">
+
+        <button type="submit">Post Comment</button>
+
+    </div>
+
+</form>
 
     <!-- COMMENTS LIST -->
     <ul class="comments-list">
 
     <?php
-    $result = $conn->query("
+    $stmt = $conn->prepare("
     SELECT blogg.*, users.username
     FROM blogg
     JOIN users ON blogg.user_id = users.id
+    WHERE blogg.post_id = ?
     ORDER BY blogg.id DESC
-");
+    ");
+
+$stmt->bind_param("i", $postId);
+$stmt->execute();
+
+$result = $stmt->get_result();
 
     while ($row = $result->fetch_assoc()) {
     ?>
@@ -157,6 +197,7 @@ include 'includes/header.php';
                         <?php if ($row['user_id'] == $_SESSION['user_id']) { ?>
 
                             <form method="post" style="display:inline;">
+                                <input type="hidden" name="post_id" value="<?= $postId ?>">
                                 <button type="submit" name="edit" value="<?= $row['id'] ?>">Edit</button>
                             </form>
 
