@@ -1,6 +1,7 @@
 <?php include 'includes/header.php'; ?>
 <?php include 'db.php'; ?>
 <?php include './helpers/helper.php'; ?>
+<?php include './helpers/admin-helper.php';?>
 
 <main>
 
@@ -12,12 +13,9 @@
 </p>
 
 <div class="comment-content-box">
-
-    <div class="comment-content-img"><img src="img/laravel.png" alt=""></div>
-
-    <div  class="comment-content-img"><img src="img/php.jpg" alt=""></div>
-
-    <div class="comment-content-img"><img src="img/css.jpg" alt=""></div>
+  
+    <?php blogImages();  ?>
+  
 
 </div>
 

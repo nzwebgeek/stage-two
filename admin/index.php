@@ -1,41 +1,57 @@
-<?php session_start();
-
+<?php
 require 'includes/auth.php';
+require 'includes/db.php';
 
+include 'includes/header.php';
+include 'includes/sidebar.php';
 ?>
-
-
-<?php include 'includes/header.php'; ?>
-
-<?php include 'includes/sidebar.php'; ?>
 
 <main class="content">
 
-<h1>Dashboard</h1>
+<?php
 
-<div class="cards">
+$page = $_GET['page'] ?? 'dashboard';
 
-    <div class="card">
-        <h3>Users</h3>
-        <p>24</p>
-    </div>
+switch ($page) {
 
-    <div class="card">
-        <h3>Posts</h3>
-        <p>102</p>
-    </div>
+    case 'users':
+        include 'users.php';
+        break;
 
-    <div class="card">
-        <h3>Pages</h3>
-        <p>15</p>
-    </div>
+    case 'create-user':
+    include 'create-user.php';
+    break;
 
-    <div class="card">
-        <h3>Comments</h3>
-        <p>321</p>
-    </div>
+    case 'roles':
+        include 'roles.php';
+        break;
 
-</div>
+    case 'pages':
+        include 'pages.php';
+        break;
+
+    case 'posts':
+        include 'posts.php';
+        break;
+
+        case 'create-post':
+        include 'create-post.php';
+        break;
+
+
+    case 'media':
+        include 'media.php';
+        break;
+
+    case 'settings':
+        include 'settings.php';
+        break;
+
+    default:
+        include 'admin_dashboard.php';
+}
+
+?>
 
 </main>
 

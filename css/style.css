@@ -8,6 +8,12 @@ html{
     color: white;
 
 }
+body{
+    margin:0;
+    font-family: 'Segoe UI', sans-serif;
+    background:#f4f6f9;
+    color:#333;
+}
  #form-title{
     color: black;
     text-align: center;
@@ -61,7 +67,7 @@ img{
 }
 .comment-content-img img {
     width: 100%;
-    height: 100%px;
+    height: 100%;
  
 }
 .comment-content-box {
@@ -185,24 +191,38 @@ footer{
     padding: 5rem 2rem;
     text-align: center;
 }
-
-/* Main */
+/* Posts Page*/
+.posts-container{
+    width: min(1100px, 92%);
+    margin: 40px auto;
+}
+.posts-card{
+    background:#fff;
+    border-radius:12px;
+    padding:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+/* Main index.php*/
 
 #placeholder-main {
     grid-area: main;
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 3fr 3fr 1fr;
     gap: 2rem;
     padding: 0 2rem;
+    min-height: auto;
 }
 
 .placeholder-content,
 aside {
+    
     background: white;
     padding: 2rem;
     border-radius: 8px;
     color: black;
 }
+
+
 
 /* Features */
 
@@ -227,11 +247,45 @@ aside {
     list-style: none;
 
 }
-
+/* Media Queries --------------------------------------*/
 
 /* Responsive */
+@media (max-width: 1370px) {
+    #placeholder-main {
+            grid-area: main ;
+            display: grid;
+            grid-template-columns: 1fr;
+            padding: 0;
+        }
+        
+        .placeholder-content,
+        aside {
+            
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            color: black;
+            width: 100%;
+        }
+
+    picture{
+      
+      
+        width: 100%;
+        flex-wrap: wrap;
+        object-fit:contain;
+        background-color: red;
+        height: 100vh;
+
+    }
+
+    figure{
+        background-color: #4f7df3;
+    }
+    
+}
 /* Tablets */
-@media (max-width: 1300px) {
+@media (max-width: 1200px) {
 
     .comment-content-box img{
       
@@ -245,31 +299,29 @@ aside {
     
 }
 @media (max-width: 900px) {
-
-
-    .content img {
+.content img {
     max-width: 100%;
     height: auto;
     display: block;
     }
 
-    form{
-        width: 80vw;
-    }
+.container{
+    width: 98%;
+    border-radius: 1rem;
+}
+.footer-container{
+    flex-wrap: wrap;
 
-    .container{
-        width: 98%;
-        border-radius: 1rem;
-    }
-    .footer-container{
-        flex-wrap: wrap;
-
-    }
-
-
+}
 }
 /* Phones */
 @media (max-width: 600px){
+
+     button{
+        width: 200px;
+        flex-shrink: 0;
+    }
+
     .placeholder-hero{
         margin: 0 auto;
     }
@@ -291,55 +343,47 @@ aside {
 }
 
 
-    .placeholder-container {
-        display: flex;
-        flex-wrap: wrap;
-    }
+.placeholder-container {
+    display: flex;
+    flex-wrap: wrap;
+}
 
-    .comment-content-box {
-        grid-template-columns: 1fr;
-         
+.comment-content-box {
+    grid-template-columns: 1fr;
         
-    }
+    
+}
 
-    .comment-content-box div{
-        font-size: 18px;
-        padding: 15px;
-    }
-    img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    }
-    .wrapper{
-        width: 100%;
-        margin: 20px auto;
-        padding: 0 10px;
-        background: dodgerblue;
-        text-align: center;
-    }
-   
-    .footer-container{
-        flex-wrap: wrap;
+.comment-content-box div{
+    font-size: 18px;
+    padding: 15px;
+}
+img {
+max-width: 100%;
+height: auto;
+display: block;
+}
+.wrapper{
+    width: 100%;
+    margin: 20px auto;
+    padding: 0 10px;
+    background: dodgerblue;
+    text-align: center;
+}
 
-    }
+.footer-container{
+    flex-wrap: wrap;
 
-    form{
-        width: 95%;
-    }
+}
 
-    button{
-        width: 100%;
-        justify-self: stretch;
-    }
 
-    h1{
-        font-size: 2rem;
-    }
+h1{
+    font-size: 2rem;
+}
 
-    p{
-        font-size: 1rem;
-    }
+p{
+    font-size: 1rem;
+}
 
 }
 /*-------------Placeholder End-------------------------------------------*/
@@ -455,7 +499,8 @@ form {
   border-radius: 5px;
   background-color: #f2f2f2;
   padding: 20px;
-  width: 50vw;
+  width: 100%;
+  max-width: 500px;
   margin: 0 auto;
   color: black;
 }

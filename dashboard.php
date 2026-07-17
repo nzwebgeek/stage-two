@@ -186,7 +186,7 @@ button{
 <div class="container main-body" id="container" >
 
     <div class="header">
-        <h1>Dashboard </h1>
+        <h1>Dashboard Area</h1> <h2>Create Your Own Custom Settings Below</h2>
     </div>
 <?php
 /* ==========================================
@@ -215,11 +215,11 @@ $stmt->close();
     <a href="change_password.php">Change Password</a><br>
 
     <a href="#" class="show-form" data-form="uploadForm">
-        Upload Image
+       Add Profile Image
     </a><br>
 
     <a href="#" class="show-form" data-form="profileForm">
-        Edit Profile
+        Edit Profile Colour
     </a><br>
 
      <?php if (in_array($_SESSION['role'] ?? '', ['Super Admin', 'Admin'])): ?>
@@ -233,8 +233,8 @@ $stmt->close();
 
     <div class="content">
 
-        <h3>Dashboard</h3>
-
+        <h3>User Dashboard - Panel </h3>
+        <h4>Feel free to edit your profile, using any of the settings on the left side bar</h4>
         <p>Welcome <?= htmlspecialchars($user['username']); ?>!</p>
 
         <p>You are logged in.</p>
@@ -324,7 +324,8 @@ $stmt->close();
     </div>
     
     <div class="footer">
-        <h4>Footer</h4>
+        <h4>Users Dashboard <?php echo date('Y-m-d'); // Outputs: 2026-07-14 (assuming today's date)?>
+</h4>
     </div>
 
 </div>

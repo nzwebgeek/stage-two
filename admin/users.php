@@ -1,20 +1,29 @@
 <?php
-
-session_start();
-
 require 'includes/auth.php';
+require 'includes/db.php';
 
-include 'includes/header.php';
-include 'includes/sidebar.php';
+$sql = "
+SELECT
+    u.id,
+    u.username,
+    u.email,
+    r.name AS role
+FROM users u
+LEFT JOIN roles r ON u.role_id = r.id
+ORDER BY u.username
+";
+
+$result = $conn->query($sql);
+
+$users = $result->fetch_all(MYSQLI_ASSOC);
 
 ?>
 
 <h1>Users</h1>
 
-<a href="create-user.php" class="button">+ Add User</a>
+<a href="index.php?page=create-user" class="button">+ Add User</a>
 
 <table>
-
 <tr>
     <th>Name</th>
     <th>Email</th>
@@ -22,30 +31,19 @@ include 'includes/sidebar.php';
     <th>Actions</th>
 </tr>
 
-<?php foreach($users as $user): ?>
+<?php foreach ($users as $user): ?>
 
 <tr>
-
-    <td><?= htmlspecialchars($user['username']); ?></td>
-
-    <td><?= htmlspecialchars($user['email']); ?></td>
-
-    <td><?= htmlspecialchars($user['role']); ?></td>
-
+    <td><?= htmlspecialchars($user['username']) ?></td>
+    <td><?= htmlspecialchars($user['email']) ?></td>
+    <td><?= htmlspecialchars($user['role']) ?></td>
     <td>
-
-        <a href="edit-user.php?id=<?= $user['id']; ?>">Edit</a>
-
-        |
-
-        <a href="delete-user.php?id=<?= $user['id']; ?>">Delete</a>
-
+        <a class="button" href="edit-user.php?id=<?= $user['id'] ?>">Edit</a> |
+        <a class="button" href="delete-user.php?id=<?= $user['id'] ?>"
+         onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
     </td>
-
 </tr>
 
 <?php endforeach; ?>
 
 </table>
-
-<?php include 'includes/footer.php'; ?>

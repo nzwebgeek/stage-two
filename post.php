@@ -28,9 +28,10 @@ $post = $result->fetch_assoc();
 
 ?>
 
-<main>
+<div class="posts-container">
 
-<h1><?= htmlspecialchars($post['title']) ?></h1>
+<div class="posts-card">
+    <h1><?= htmlspecialchars($post['title']) ?></h1>
 
 <p>
 
@@ -49,7 +50,8 @@ By <?= htmlspecialchars($post['username']) ?>
 <h2>Comments</h2>
 
 <?php comments($conn,$postId); ?>
+</div>
 
-</main>
+</div>
 
 <?php include 'includes/footer.php'; ?>

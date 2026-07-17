@@ -4,7 +4,7 @@ include 'includes/header.php';
 require 'db.php';
 
 $message = "";
-$role_id = 5; // User
+//$role_id = 5; // User
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
-    
+
 
     if ($password != $confirm_password) {
         $message = "Passwords do not match.";
@@ -21,16 +21,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Hash the password
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        $stmt = $conn->prepare("INSERT INTO users (username, email, password, role_id) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("sssi", $username, $email, $hashedPassword, $role_id);
+        // Look up by Name
+        $roleStmt = $conn->prepare("SELECT id FROM roles WHERE name = ?");
+        $role = "User";
+        $roleStmt->bind_param("s", $role);
+        $roleStmt->execute();
+        $result = $roleStmt->get_result();
+        $roleRow = $result->fetch_assoc();
 
-        if ($stmt->execute()) {
-            $message = "Registration successful!";
-        } else {
-            $message = "Username or email may already exist.";
-        }
+        $role_id = $roleRow['id'];
 
-        $stmt->close();
+        // check if name exists first
+            $check = $conn->prepare("
+    SELECT id
+    FROM users
+    WHERE username = ? OR email = ?
+");
+
+$check->bind_param("ss", $username, $email);
+$check->execute();
+$check->store_result();
+
+if ($check->num_rows > 0) {
+    $message = "That username or email is already registered.";
+} else {
+
+    $stmt = $conn->prepare("
+        INSERT INTO users (username, email, password, role_id)
+        VALUES (?, ?, ?, ?)
+    ");
+
+    $stmt->bind_param("sssi", $username, $email, $hashedPassword, $role_id);
+
+    if ($stmt->execute()) {
+        $message = "Registration successful!";
+    }
+
+    $stmt->close();
+}
+
+$check->close();
+      
+
+     
+       
+
     }
 }
 ?>

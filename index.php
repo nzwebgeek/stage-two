@@ -1,26 +1,65 @@
 
-<?php include 'includes/header.php'; ?>
+<?php include 'includes/header.php'; 
+
+
+require 'db.php';
+
+$stmt = $conn->prepare("SELECT * FROM pages WHERE slug IN (?, ?, ?, ?, ?, ?)");
+
+$home = "home";
+$aside = "aside";
+$features = "features";
+$services = "services";
+$social = "social";
+$footer = "footer";
+
+$stmt->bind_param(
+    "ssssss",
+    $home,
+    $aside,
+    $features,
+    $services,
+    $social,
+    $footer
+);
+
+$stmt->execute();
+
+$result = $stmt->get_result();
+
+$pages = [];
+
+while ($row = $result->fetch_assoc()) {
+    $pages[$row['slug']] = $row;
+}
+?>
 <div class="placeholder-container">
 
     <section class="placeholder-hero">
-        <h1>Welcome to Our Website</h1>
-        <p>Join our community and share your ideas and knowledge.</p>
+        <h1><?= htmlspecialchars($pages['home']['hero_title']) ?></h1>
+        <p><?= htmlspecialchars($pages['home']['hero_subtitle']) ?></p>
         <button id="toggleBtn">Change Color</button>
 
     </section>
 
+  
     <main id="placeholder-main">
+          <figure   >
+            <picture>
+                <source media="(min-width: 800px)" srcset="/images/tech.jpg">
+                <source media="(min-width: 400px)" srcset="/images/tech.jpg">
+                <img src="/images/tech.jpg" alt="Sunset over the mountains">
+            </picture>
+            <figcaption>Sunset — shown in different sizes depending on screen.</figcaption>
+            </figure>
+
         <section class="placeholder-content">
-            <h2>Shaping the Future with Technology</h2>
-            <p>Technology is transforming the way people work, connect, and create. From intelligent automation to cloud infrastructure and data-driven decision making, modern digital solutions help businesses adapt to changing markets and unlock new opportunities for growth.
-
-Our approach combines innovation with practical expertise to build reliable, scalable, and user-focused solutions. Whether developing custom software, optimizing existing systems, or integrating emerging technologies, every project is designed with performance, security, and long-term success in mind.
-
-By embracing the latest advancements while focusing on real-world outcomes, organizations can streamline operations, enhance customer experiences, and stay ahead in an increasingly connected world. Together, we turn ideas into impactful digital experiences that drive measurable results.</p>
+           <h2><?= htmlspecialchars($pages['home']['main_heading']) ?></h2>
+            <p><?= nl2br(htmlspecialchars($pages['home']['main_content'])) ?></p>
         </section>
 
         <aside id="placeholder-aside">
-            <h3>Why Choose Us?</h3>
+            <h3><?= htmlspecialchars($pages['features']['main_heading'] ?? '') ?></h3>
             <ul class="placeholder-menu">
                 <li>✓ Experienced Development Team</li>
                 <li>✓ Modern Technology Stack</li>
@@ -30,38 +69,27 @@ By embracing the latest advancements while focusing on real-world outcomes, orga
             </ul>
            
         </aside>
+
     </main>
 
     <section class="placeholder-features">
-        <article> <h3>Latest Insights</h3>
+        <article><h3><?= htmlspecialchars($pages['features']['main_heading']) ?></h3>
         <ul class="placeholder-menu">
-            <li>Cloud Solutions </li>
-            <li>AI & Automation</li>
-            <li>Web Development</li>
-            <li>Mobile Apps</li>
-            <li>Cybersecurity</li>
-            <li>Data Analytics</li>
+            <p><?= nl2br(htmlspecialchars($pages['features']['main_content'])) ?></p>
         </ul>
     
 
      
        
        </article>
-        <article><h3>Featured Services</h3>Cloud Solutions
+        <article><h3><?= htmlspecialchars($pages['services']['main_heading']) ?></h3>
         <ul class="placeholder-menu">
-            <li>AI & Automation</li>
-            <li>Web Development</li>
-            <li>Mobile Apps</li>
-            <li>Cybersecurity</li>
-            <li>Data Analytics </li>
+           <p><?= nl2br(htmlspecialchars($pages['services']['main_content'])) ?></p>
         </ul>
         </article>
-        <article><h3>Follow Us</h3>
+        <article><h3><?= htmlspecialchars($pages['social']['main_heading']) ?></h3>
         <ul class="placeholder-menu">
-            <li>LinkedIn</li>
-            <li>GitHub</li>
-            <li>X (Twitter)</li>
-            <li> Facebook</li>
+            <p><?= nl2br(htmlspecialchars($pages['social']['main_content'])) ?></p>
         </ul>
     
     
