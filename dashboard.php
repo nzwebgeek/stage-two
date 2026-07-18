@@ -275,9 +275,9 @@ body{
 }
 .profile-card img{
 
-width:150px;
+width:120px;
 
-height:150px;
+height:120px;
 
 object-fit:cover;
 
@@ -419,8 +419,7 @@ height:auto;
 
     padding:25px;
 
-    margin-top:25px;
-
+    margin-bottom:35px;
 }
 
 button,
@@ -449,24 +448,40 @@ input[type=submit]:hover{
 
 }
 
+form p{
+
+    margin-bottom:15px;
+
+}
+
+form{
+
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+
+}
+
 input[type=color]{
 
     width:100%;
-
-    height:50px;
-
+    height:60px;
     border:none;
-
+    border-radius:12px;
+    cursor:pointer;
+    background:none;
     margin-bottom:20px;
 
 }
 
 input[type=file]{
 
-    margin:20px 0;
+    padding:15px;
+    border:2px dashed #ddd;
+    border-radius:12px;
+    background:#fafafa;
 
 }
-
 .message{
 
     background:#d4edda;
@@ -986,4 +1001,8 @@ behavior:"smooth"
 });
 
 </script>
-<div class="footer"></div>
+<div class="footer">
+    <h4>
+        User Dashboard • <?= date('F j, Y'); ?>
+    </h4>
+</div>
