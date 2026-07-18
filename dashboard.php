@@ -179,7 +179,7 @@ include 'includes/my-header.php';
 body{
 
     font-family:Arial, Helvetica, sans-serif;
-    background:#eef2f7;
+    background:linear-gradient(135deg,#eef2f7,#dfe8f7);
 
 }
 
@@ -420,6 +420,27 @@ height:auto;
     padding:25px;
 
     margin-bottom:35px;
+
+    position:relative;
+    
+    overflow:hidden;
+}
+
+.card::before{
+
+content:"";
+
+position:absolute;
+
+left:0;
+top:0;
+
+width:5px;
+
+height:100%;
+
+background:var(--theme);
+
 }
 
 button,
