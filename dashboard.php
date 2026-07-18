@@ -441,10 +441,19 @@ input[type=submit]{
 
 }
 
+button,
+input[type=submit]{
+
+    transition:.25s;
+
+}
+
 button:hover,
 input[type=submit]:hover{
 
-    opacity:.92;
+    transform:translateY(-2px);
+
+    box-shadow:0 8px 18px rgba(0,0,0,.15);
 
 }
 
