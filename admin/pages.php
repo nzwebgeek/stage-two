@@ -10,7 +10,7 @@ $result = $conn->query("SELECT * FROM pages ORDER BY slug");
 
 ?>
 
-<main class="content">
+<main>
 
 <h1>Edit Website Pages</h1>
 
@@ -70,6 +70,21 @@ Save Changes
 
 </form>
 
+</form>
+
+<form action="delete-page.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this page?');">
+
+    <input 
+        type="hidden" 
+        name="id" 
+        value="<?= $page['id'] ?>"
+    >
+
+    <button type="submit" style="background:red;color:white;">
+        Delete Page
+    </button>
+
+</form>
 </div>
 
 

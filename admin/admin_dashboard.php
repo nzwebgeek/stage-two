@@ -123,15 +123,15 @@ $todayVisitors = 542;
 
                 <div class="d-grid gap-2 mt-3">
 
-                    <a href="pages/new.php" class="btn btn-primary">New Page</a>
+                    <a href="index.php?page=create-page" class="btn btn-primary">New Page</a>
 
-                    <a href="posts/new.php" class="btn btn-success">New Post</a>
+                    <a href="index.php?page=create-post" class="btn btn-success">New Post</a>
 
-                    <a href="users/add.php" class="btn btn-warning">Add User</a>
+                    <a href="index.php?page=create-user" class="btn btn-warning">Add User</a>
 
-                    <a href="media/upload.php" class="btn btn-info">Upload Media</a>
+                    <a href="index.php?page=media" class="btn btn-info">Upload Media</a>
 
-                    <a href="settings.php" class="btn btn-secondary">Settings</a>
+                    <a href="index.php?page=settings" class="btn btn-secondary">Settings</a>
 
                 </div>
 

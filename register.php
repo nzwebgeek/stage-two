@@ -45,17 +45,55 @@ $check->store_result();
 if ($check->num_rows > 0) {
     $message = "That username or email is already registered.";
 } else {
-
+ /**Generate token */
+    $token = bin2hex(random_bytes(32));
+    /*Generate token*/
     $stmt = $conn->prepare("
-        INSERT INTO users (username, email, password, role_id)
-        VALUES (?, ?, ?, ?)
+        INSERT INTO users (username, email, password, role_id, verification_token)
+        VALUES (?, ?, ?, ?, ?)
     ");
 
-    $stmt->bind_param("sssi", $username, $email, $hashedPassword, $role_id);
-
-    if ($stmt->execute()) {
+    $stmt->bind_param("sssis", $username, $email, $hashedPassword, $role_id, $token);
+   
+    /*if ($stmt->execute()) {
         $message = "Registration successful!";
-    }
+    }*/
+    /*Verification Start*/
+    if ($stmt->execute()) {
+
+    $verifyLink = "http://stage-one.test/verify.php?token=" . $token;
+
+
+    $subject = "Confirm your account";
+
+    $body = "
+    <h2>Welcome $username</h2>
+
+    <p>Please confirm your email address by clicking this link:</p>
+
+    <a href='$verifyLink'>
+    Verify Account
+    </a>
+    ";
+
+
+    $headers = "MIME-Version: 1.0\r\n";
+    $headers .= "Content-type:text/html;charset=UTF-8\r\n";
+    $headers .= "From: noreply@stage-one.com\r\n";
+
+
+    mail(
+        $email,
+        $subject,
+        $body,
+        $headers
+    );
+
+
+    $message = "Registration successful. Please check your email to verify your account.";
+
+}
+    /*Verification End*/
 
     $stmt->close();
 }

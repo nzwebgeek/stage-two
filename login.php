@@ -16,14 +16,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //$stmt = $conn->prepare("SELECT id, username, password, role FROM users WHERE username = ?");
     $stmt = $conn->prepare("
     SELECT
-        u.id,
-        u.username,
-        u.password,
-        r.name AS role
-    FROM users u
-    LEFT JOIN roles r
-        ON u.role_id = r.id
-    WHERE u.username = ?
+    u.id,
+    u.username,
+    u.password,
+    u.email_verified,
+    r.name AS role
+FROM users u
+LEFT JOIN roles r
+    ON u.role_id = r.id
+WHERE u.username = ?
 ");
 
     $stmt->bind_param("s", $username);
@@ -32,7 +33,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $stmt->get_result();
     $user = $result->fetch_assoc();
 
+    
+
     if ($user && password_verify($password, $user['password'])) {
+        
+        if ($user['email_verified'] == 0) {
+            echo "Please verify your email before logging in.";
+            exit;
+        }
 
         session_regenerate_id(true);
 

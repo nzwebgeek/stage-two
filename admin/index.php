@@ -30,6 +30,10 @@ switch ($page) {
         include 'pages.php';
         break;
 
+    case 'create-page':
+    include 'create-page.php';
+    break;
+
     case 'posts':
         include 'posts.php';
         break;
