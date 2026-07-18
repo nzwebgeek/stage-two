@@ -489,6 +489,24 @@ form{
     display:flex;
     flex-direction:column;
     gap:15px;
+    animation:fadeIn .3s ease;
+}
+
+@keyframes fadeIn{
+
+from{
+
+opacity:0;
+transform:translateY(15px);
+
+}
+
+to{
+
+opacity:1;
+transform:translateY(0);
+
+}
 
 }
 

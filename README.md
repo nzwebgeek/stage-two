@@ -32,4 +32,4 @@ This project serves as both a learning exercise and a portfolio piece, demonstra
 
 "This project documents my journey of building a PHP CMS from scratch."
 
-Note: Some interface improvements and refactoring ideas were developed with assistance from ChatGPT, while the application's architecture and implementation were built as part of my learning process.
+Note: Some interface improvements and refactoring ideas were developed with assistance from ChatGPT, while the application's architecture and implementation were built as part of my learning process.# stage-two
