@@ -26,6 +26,6 @@ $id
 );
 
 $stmt->execute();
-
+// Todo: go back to user and display a 'added successfully message
 header("Location: index.php?page=users");
 exit;

@@ -13,14 +13,23 @@ ORDER BY p.created_at DESC
 ";
 
 $result = $conn->query($sql);
+
 ?>
 
 <h1>Posts</h1>
+
 <?php if (isset($_GET['success'])): ?>
     <div class="success">
-        Post created successfully.
+        <?php
+        if ($_GET['success'] === 'deleted') {
+            echo "Post deleted successfully.";
+        } elseif ($_GET['success'] === 'created') {
+            echo "Post created successfully.";
+        }
+        ?>
     </div>
 <?php endif; ?>
+
 <a href="index.php?page=create-post" class="button">+ New Post</a>
 
 <table>
@@ -40,25 +49,27 @@ $result = $conn->query($sql);
 
 <td><?= htmlspecialchars($post['author']) ?></td>
 
-<td><?= $post['created_at'] ?></td>
+<td><?= htmlspecialchars($post['created_at']) ?></td>
 
 <td>
-    <a class="button"
-       href="index.php?page=edit-post&id=<?= $post['id'] ?>">
-        Edit
-    </a>
 
-    <a class="button"
-       href="../post.php?id=<?= $post['id'] ?>"
-       target="_blank">
-        View
-    </a>
+<a class="button"
+href="index.php?page=edit-post&id=<?= $post['id'] ?>">
+Edit
+</a>
 
-    <a class="button"
-       href="index.php?page=delete-post&id=<?= $post['id'] ?>"
-       onclick="return confirm('Delete this post?')">
-        Delete
-    </a>
+<a class="button"
+href="../post.php?id=<?= $post['id'] ?>"
+target="_blank">
+View
+</a>
+
+<a class="delete-button"
+href="index.php?page=delete-post&id=<?= $post['id'] ?>"
+onclick="return confirm('Delete this post?')">
+Delete
+</a>
+
 </td>
 
 </tr>

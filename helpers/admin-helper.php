@@ -1,25 +1,22 @@
 <?php 
-    function blogImages(){
-        
-    if (isset($_SESSION['user_id']) && in_array($_SESSION['role'] ?? '', ['Super Admin', 'Admin'])){
-        
-        echo '<div class="comment-content-img"><img src="img/laravel.png" alt="">
-                <a class="update-btn" href="admin/update-image.php?id=1">Update</a></div>
+    function blogImages($conn){
 
-        <div  class="comment-content-img"><img src="img/php.jpg" alt=""><button >Update</button></div>
+    $result = $conn->query("
+        SELECT * FROM blog_settings LIMIT 1
+    ");
 
-        <div class="comment-content-img"><img src="img/css.jpg" alt=""><button>Update</button></div>
+    $images = $result->fetch_assoc();
+
+
+    echo '
+    <div class="comment-content-img">
+        <img src="img/'.$images['image_one'].'" alt="Blog image">
+    </div>
+
+    <div class="comment-content-img">
+        <img src="img/'.$images['image_two'].'" alt="Blog image">
+    </div>
     ';
-    }
-    else{
-        echo '<div class="comment-content-img"><img src="img/laravel.png" alt=""></div>
 
-            <div  class="comment-content-img"><img src="img/php.jpg" alt=""></div>
+}
 
-            <div class="comment-content-img"><img src="img/css.jpg" alt=""></div>
-        ';
-    }
-       
-    }
-
-   

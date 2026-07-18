@@ -38,8 +38,8 @@ $users = $result->fetch_all(MYSQLI_ASSOC);
     <td><?= htmlspecialchars($user['email']) ?></td>
     <td><?= htmlspecialchars($user['role']) ?></td>
     <td>
-        <a class="button" href="edit-user.php?id=<?= $user['id'] ?>">Edit</a> |
-        <a class="button" href="delete-user.php?id=<?= $user['id'] ?>"
+       <a class="button" href="index.php?page=edit-user&id=<?= $user['id'] ?>">Edit</a> 
+        <a class="delete-button" href="index.php?page=delete-user&id=<?= $user['id'] ?>"
          onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
     </td>
 </tr>

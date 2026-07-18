@@ -2,6 +2,7 @@
 require 'includes/auth.php';
 require 'includes/db.php';
 
+
 $id = (int)$_GET['id'];
 
 $stmt = $conn->prepare("
@@ -66,7 +67,7 @@ value="<?= $role['id'] ?>"
 
 </select>
 
-<button type="submit">
+<button class="button" type="submit">
 Save Changes
 </button>
 

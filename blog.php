@@ -3,7 +3,7 @@
 <?php include './helpers/helper.php'; ?>
 <?php include './helpers/admin-helper.php';?>
 
-<main>
+<main class="blog-container">
 
 <h1>Comments Section</h1>
 
@@ -14,7 +14,7 @@
 
 <div class="comment-content-box">
   
-    <?php blogImages();  ?>
+  <?php blogImages($conn); ?>
   
 
 </div>

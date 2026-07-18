@@ -1,7 +1,7 @@
 <?php
 require 'includes/auth.php';
 ?>
-
+<!--Todo: needs extra features-->
 <h2>Settings</h2>
 
 <form method="post">

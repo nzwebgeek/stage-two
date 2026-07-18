@@ -70,7 +70,7 @@ $roles = $conn->query("SELECT id, name FROM roles ORDER BY name");
         </select>
     </p>
 
-    <button type="submit">Create User</button>
+    <button class="delete-button" type="submit">Create User</button>
 
 </form>
 

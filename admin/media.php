@@ -1,7 +1,8 @@
-<form action="upload-media.php"
+<form action="index.php?page=upload-media"
       method="POST"
       enctype="multipart/form-data">
 <h1>Media Upload</h1>
+<p>Feel free to upload an image for a webpage template.</p>
 <label>Select Image</label>
 
 <input
@@ -19,7 +20,7 @@ name="alt_text"
 maxlength="255">
 
 
-<button class="button" type="submit">
+<button class="button" type="submit"><a href="index.php?page=upload-media"></a>
 Upload
 </button>
 

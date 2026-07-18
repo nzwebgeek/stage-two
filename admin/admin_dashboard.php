@@ -1,11 +1,39 @@
 <?php
+include 'includes/db.php';
 
+// Select User
+$stmt = $conn->prepare("SELECT COUNT(*) AS total FROM users");
+$stmt->execute();
+
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+
+$total_users = $row['total'];
+
+// Select Pages
+$stmt = $conn->prepare("SELECT COUNT(*) AS total FROM pages");
+$stmt->execute();
+
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+
+$total_pages = $row['total'];
+
+// Select Posts
+$stmt = $conn->prepare("SELECT COUNT(*) AS total FROM posts");
+$stmt->execute();
+
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+
+$total_posts = $row['total'];
 // Example data (replace with database queries)
-$totalUsers = 125;
-$totalPages = 32;
-$totalPosts = 87;
+
+
 $totalComments = 14;
 $todayVisitors = 542;
+
+
 ?>
 
 <!DOCTYPE html>
@@ -45,21 +73,21 @@ $todayVisitors = 542;
         <div class="col-md-3">
             <div class="card text-center p-3">
                 <h6>Total Users</h6>
-                <div class="stat"><?= $totalUsers ?></div>
+                <div class="stat"><?= $total_users ?></div>
             </div>
         </div>
 
         <div class="col-md-3">
             <div class="card text-center p-3">
                 <h6>Total Pages</h6>
-                <div class="stat"><?= $totalPages ?></div>
+                <div class="stat"><?= $total_pages  ?></div>
             </div>
         </div>
 
         <div class="col-md-3">
             <div class="card text-center p-3">
                 <h6>Total Posts</h6>
-                <div class="stat"><?= $totalPosts ?></div>
+                <div class="stat"><?= $total_posts ?></div>
             </div>
         </div>
 

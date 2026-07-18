@@ -18,7 +18,7 @@ $result = $conn->query($sql);
 
 <h1>Roles</h1>
 
-
+Below demonstrates the role per user and the associated action being described, along with the number of users in that particular role. <br> To edit a role, go to Users then click Edit.
 
 <table>
 

@@ -1,5 +1,5 @@
 <?php
-require_once "../config/db.php";
+require_once "includes/db.php";
 
 $id = (int)$_GET['id'];
 
@@ -25,7 +25,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     exit;
 }
 ?>
-
+<!--Tod: need a updated successfully message-->
+<h1>Edit Post</h1>
 <form method="post">
 
 <input
@@ -43,6 +44,6 @@ cols="80"><?= htmlspecialchars($post['content']) ?></textarea>
 
 <br><br>
 
-<button type="submit">Save Changes</button>
+<button class="button" type="submit">Save Changes</button>
 
 </form>

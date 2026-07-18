@@ -28,30 +28,33 @@ $post = $result->fetch_assoc();
 
 ?>
 
-<div class="posts-container">
+<div class="post-page">
 
-<div class="posts-card">
-    <h1><?= htmlspecialchars($post['title']) ?></h1>
+    <article class="post-card">
 
-<p>
+        <h1 class="post-title">
+            <?= htmlspecialchars($post['title']) ?>
+        </h1>
 
-By <?= htmlspecialchars($post['username']) ?>
+        <div class="post-meta">
+            By <strong><?= htmlspecialchars($post['username']) ?></strong>
+        </div>
 
-</p>
+        <div class="post-content">
+            <?= nl2br(htmlspecialchars($post['content'])) ?>
+        </div>
 
-<p>
+    </article>
 
-<?= nl2br(htmlspecialchars($post['content'])) ?>
+    <section class="comments-section">
 
-</p>
+        <h2 class="comments-heading">
+            Comments
+        </h2>
 
-<hr>
+        <?php comments($conn, $postId); ?>
 
-<h2>Comments</h2>
+    </section>
 
-<?php comments($conn,$postId); ?>
 </div>
-
-</div>
-
 <?php include 'includes/footer.php'; ?>

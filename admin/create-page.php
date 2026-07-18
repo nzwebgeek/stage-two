@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </select>
 
 
-<button type="submit">
+<button class="button" type="submit">
 Create Page
 </button>
 

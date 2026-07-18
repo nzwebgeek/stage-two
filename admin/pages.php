@@ -63,7 +63,7 @@ $result = $conn->query("SELECT * FROM pages ORDER BY slug");
 >
 
 
-<button type="submit">
+<button class="button" type="submit">
 Save Changes
 </button>
 
@@ -80,7 +80,7 @@ Save Changes
         value="<?= $page['id'] ?>"
     >
 
-    <button type="submit" style="background:red;color:white;">
+    <button class="button" type="submit" style="background:red;color:white;">
         Delete Page
     </button>
 

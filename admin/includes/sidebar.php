@@ -13,5 +13,7 @@ $page = $_GET['page'] ?? 'dashboard';
         <li><a href="index.php?page=posts">📝 Posts</a></li>
         <li><a href="index.php?page=media">🖼 Media</a></li>
         <li><a href="index.php?page=settings">⚙ Settings</a></li>
+    <li><a href="index.php?page=upload-blog-image
+    ">🖼 Upload Blog Image</a></li>
     </ul>
 </aside>

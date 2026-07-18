@@ -18,6 +18,19 @@ switch ($page) {
         include 'users.php';
         break;
 
+    case 'delete-user':
+        include 'delete-user.php';
+        break;
+        
+     case 'edit-user':
+        include 'edit-user.php';
+        break;
+
+    
+     case 'edit-post':
+        include 'edit-post.php';
+        break;
+
     case 'create-user':
     include 'create-user.php';
     break;
@@ -38,13 +51,24 @@ switch ($page) {
         include 'posts.php';
         break;
 
-        case 'create-post':
-        include 'create-post.php';
-        break;
+    case 'create-post':
+    include 'create-post.php';
+    break;
 
+    case 'delete-post':
+        include 'delete-post.php';
+        break;
 
     case 'media':
         include 'media.php';
+        break;
+
+    case 'upload-media':
+        include 'upload-media.php';
+        break;
+
+    case 'upload-blog-image':
+        include 'upload-blog-image.php';
         break;
 
     case 'settings':
