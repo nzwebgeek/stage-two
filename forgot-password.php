@@ -17,24 +17,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if($user = $result->fetch_assoc()){
 
         $token = bin2hex(random_bytes(32));
+        $tokenHash = hash('sha256', $token);
+
         $expires = date("Y-m-d H:i:s", strtotime("+1 hour"));
 
         $stmt = $conn->prepare("
             UPDATE users
-            SET reset_token=?, reset_expires=?
+            SET
+                reset_token=?,
+                reset_expires=?
             WHERE id=?
         ");
 
         $stmt->bind_param(
             "ssi",
-            $token,
+            $tokenHash,
             $expires,
             $user['id']
         );
 
+$stmt->execute();
         $stmt->execute();
 
-        $link = "http://stage-one.test/reset-password.php?token=".$token;
+        $link = "http://stage-two.test/reset-password.php?token=".$token;
 
         // Mail example
         mail(

@@ -73,9 +73,9 @@ if (isset($_POST['submit'])) {
 
             $message = "Only JPG, JPEG, PNG, GIF and WebP images are allowed.";
 
-        } elseif ($_FILES['image']['size'] > (5 * 1024 * 1024)) {
+        } elseif ($_FILES['image']['size'] > (10 * 1024 * 1024)) {
 
-            $message = "Image must be under 5MB.";
+            $message = "Image must be under 10MB.";
 
         } else {
 

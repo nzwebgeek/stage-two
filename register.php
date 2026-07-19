@@ -5,6 +5,11 @@ require 'db.php';
 
 $message = "";
 //$role_id = 5; // User
+/*Todo: make sure if verify link expires, you can reset it*/
+/*Problem: Verify page loaded
+Token: 9cf846f26f62d00f8c3fc1ae91a169316fb0b700af6a7305006472cd9346ed7c
+Rows updated: 0
+Invalid or expired verification link.*/
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -61,7 +66,7 @@ if ($check->num_rows > 0) {
     /*Verification Start*/
     if ($stmt->execute()) {
 
-    $verifyLink = "http://stage-one.test/verify.php?token=" . $token;
+    $verifyLink = "http://stage-two.test/verify.php?token=" . $token;
 
 
     $subject = "Confirm your account";

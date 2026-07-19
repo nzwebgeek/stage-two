@@ -7,6 +7,9 @@ require 'db.php';
 include 'includes/header.php';
 
 $message = "";
+$messageType = "";
+/*Todo: make sure to update  this message 'Please verify your email before logging in. Update appearence of message*/
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -37,11 +40,11 @@ WHERE u.username = ?
 
     if ($user && password_verify($password, $user['password'])) {
         
-        if ($user['email_verified'] == 0) {
-            echo "Please verify your email before logging in.";
-            exit;
-        }
-
+       if (!$user['email_verified']) {
+        $messageType = "warning";
+    $message = "Please verify your email before logging in before you can access your account.";
+        } 
+        else {
         session_regenerate_id(true);
 
         $_SESSION['user_id'] = $user['id'];
@@ -50,8 +53,10 @@ WHERE u.username = ?
 
         header("Location: dashboard.php");
         exit();
+    }
 
     } else {
+        $messageType = "error";
         $message = "Invalid username or password.";
     }
 
@@ -63,8 +68,10 @@ WHERE u.username = ?
     <section>
         <h1>Login</h1>
 
-        <?php if (!empty($message)): ?>
-            <p style="color:red;"><?php echo htmlspecialchars($message); ?></p>
+       <?php if (!empty($message)): ?>
+            <div class="alert <?php echo $messageType; ?>">
+                <?php echo htmlspecialchars($message); ?>
+            </div>
         <?php endif; ?>
 
         <form action="" method="post">

@@ -491,6 +491,20 @@ input[type=submit] {
 
 }
 
+.alert {
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #f5c2c7;
+    background: #f8d7da;
+    color: #842029;
+}
+
+.alert.warning {
+    background: #fff3cd;
+    border-color: #ffecb5;
+    color: #664d03;
+}
 
 /* TABLETS */
 /* TABLETS */
